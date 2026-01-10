@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<backup-scheme>
+    <domain name="database" />
+    <domain name="sharedpref" />
+    <domain name="file" />
+</backup-scheme>
