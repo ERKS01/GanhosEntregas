@@ -2,8 +2,8 @@ package com.ganhos.app.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
+import androidx.navigation.fragment.NavHostFragment
 import com.ganhos.app.R
 import com.ganhos.app.databinding.ActivityMainBinding
 
@@ -15,21 +15,13 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        try {
-            // Encontrar o NavHostFragment usando supportFragmentManager
-            val navHostFragment = supportFragmentManager
-                .findFragmentById(R.id.navHostFragment) as? NavHostFragment
+        // NavHostFragment agora será criado automaticamente pelo FragmentContainerView
+        val navHostFragment = supportFragmentManager
+            .findFragmentById(R.id.navHostFragment) as? NavHostFragment
 
-            if (navHostFragment != null) {
-                val navController = navHostFragment.navController
-                binding.bottomNav.setupWithNavController(navController)
-            } else {
-                // Log para debug
-                android.util.Log.e("MainActivity", "NavHostFragment não encontrado!")
-            }
-        } catch (e: Exception) {
-            android.util.Log.e("MainActivity", "Erro ao configurar navegação: ${e.message}")
-            e.printStackTrace()
+        navHostFragment?.let { fragment ->
+            val navController = fragment.navController
+            binding.bottomNav.setupWithNavController(navController)
         }
     }
 }
